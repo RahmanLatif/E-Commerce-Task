@@ -1,0 +1,82 @@
+﻿@using E_Commerce_Task.Models
+@model E_Commerce_Task.Models.ProductDTO
+
+@{
+    ViewBag.Title = "Edit Product";
+    SelectList selects = new SelectList(typeof(ProductCategory).GetEnumValues());
+}
+
+<h2>EditProduct</h2>
+
+@using (Html.BeginForm("EditProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data", style = "background-color:ghostwhite" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <textarea class="form-control" name="ProductDescription">@Model.ProductDescription</textarea>
+                @Html.ValidationMessageFor(model => model.ProductDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="Category">
+                    @foreach (var cat in selects)
+                    {
+                        if (cat.Text == Model.Category)
+                        {
+                            <option value="@cat.Text" selected>@cat.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@cat.Text">@cat.Text</option>
+                        }
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { type = "number", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductImage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductImage, new { htmlAttributes = new { type = "file", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

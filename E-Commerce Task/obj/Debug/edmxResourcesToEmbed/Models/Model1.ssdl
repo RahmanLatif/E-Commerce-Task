@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProductsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="ProductDescription" Type="varchar" MaxLength="255" />
+    <Property Name="Category" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ProductImage" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Function Name="AddProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductName" Type="varchar" Mode="In" />
+    <Parameter Name="ProductDescription" Type="varchar" Mode="In" />
+    <Parameter Name="Category" Type="varchar" Mode="In" />
+    <Parameter Name="Price" Type="decimal" Mode="In" />
+    <Parameter Name="ProductImage" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="ProductName" Type="varchar" Mode="In" />
+    <Parameter Name="ProductDescription" Type="varchar" Mode="In" />
+    <Parameter Name="Category" Type="varchar" Mode="In" />
+    <Parameter Name="Price" Type="decimal" Mode="In" />
+    <Parameter Name="ProductImage" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Category" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="ProductsModelStoreContainer">
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
